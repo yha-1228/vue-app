@@ -1,19 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <ProductTable
+      :products="[
+        {
+          id: '1',
+          name: 'Incredible Concrete Shoes',
+        },
+        {
+          id: '2',
+          name: 'Small Rubber Cheese',
+        },
+        {
+          id: '3',
+          name: 'Ergonomic Soft Soap',
+        },
+      ]"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductTable from './components/ProductTable.vue';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { ProductTable },
+};
 </script>
 
 <style>
