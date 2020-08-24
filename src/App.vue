@@ -1,21 +1,6 @@
 <template>
   <div id="app">
-    <ProductTable
-      :products="[
-        {
-          id: '1',
-          name: 'Incredible Concrete Shoes',
-        },
-        {
-          id: '2',
-          name: 'Small Rubber Cheese',
-        },
-        {
-          id: '3',
-          name: 'Ergonomic Soft Soap',
-        },
-      ]"
-    />
+    <div class="container"><ProductTable /></div>
   </div>
 </template>
 
@@ -28,4 +13,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/* base */
+/* ============================================================== */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.7;
+  color: rgb(30, 30, 30);
+}
+
+/* components */
+/* ============================================================== */
+
+.container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+</style>
