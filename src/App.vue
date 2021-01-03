@@ -18,18 +18,37 @@ export default {
 /* ============================================================== */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.7;
   color: rgb(30, 30, 30);
+}
+
+table {
+  border-collapse: collapse;
 }
 
 /* components */
 /* ============================================================== */
 
 .container {
-  max-width: 950px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+/* utils */
+/* ============================================================== */
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 </style>

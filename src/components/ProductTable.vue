@@ -1,74 +1,66 @@
 <template>
-  <table class="product-table">
-    <thead>
-      <tr class="table-row">
-        <th class="table-cell text-right">ID</th>
-        <th class="table-cell text-left">Brand</th>
-        <th class="table-cell text-left">Category</th>
-        <th class="table-cell text-left">Name</th>
-        <th class="table-cell text-right">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="product in products"
-        :key="product.id"
-        class="table-row"
-        v-bind:class="product.stocked ? 'warn' : !undefined"
-      >
-        <td class="table-cell text-right">{{ product.id }}</td>
-        <td class="table-cell text-left">{{ product.brand }}</td>
-        <td class="table-cell text-left">{{ product.category }}</td>
-        <td class="table-cell text-left">{{ product.name }}</td>
-        <td class="table-cell text-right">{{ product.price }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div v-if="error">Error: {{ error }}</div>
+  <div v-else-if="!isLoaded">Loading...</div>
+  <div v-else>
+    <table class="table">
+      <thead>
+        <tr class="table-row">
+          <th class="table-cell text-right">ID</th>
+          <th class="table-cell text-left">Brand</th>
+          <th class="table-cell text-left">Category</th>
+          <th class="table-cell text-left">Name</th>
+          <th class="table-cell text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="product in products"
+          :key="product.id"
+          class="table-row"
+          v-bind:class="product.stocked ? 'table-row--warn' : !undefined"
+        >
+          <td class="table-cell text-right">{{ product.id }}</td>
+          <td class="table-cell text-left">{{ product.brand }}</td>
+          <td class="table-cell text-left">{{ product.category }}</td>
+          <td class="table-cell text-left">{{ product.name }}</td>
+          <td class="table-cell text-right">{{ product.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { productsUrl } from '../constants';
 
 export default {
   data() {
     return {
+      isLoaded: false,
       products: [],
+      error: null,
     };
   },
   mounted() {
-    axios
-      .get('https://5e6736691937020016fed762.mockapi.io/products')
-      .then((response) => {
-        this.products = response.data;
+    fetch(productsUrl)
+      .then((res) => res.json())
+      .then((result) => {
+        this.isLoaded = true;
+        this.products = result;
+      })
+      .catch((error) => {
+        this.isLoaded = true;
+        this.error = error;
       });
   },
 };
 </script>
 
 <style scoped>
-/* utils */
-/* ============================================================== */
-
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.warn {
-  color: red;
-}
-
 /* components */
 /* ============================================================== */
 
-.product-table {
+.table {
   width: 100%;
 }
 
@@ -76,18 +68,12 @@ export default {
   border-bottom: 1px solid lightgray;
 }
 
+.table-row--warn {
+  color: gray;
+  /* background-color: rgb(248, 240, 213); */
+}
+
 .table-cell {
-  padding: 10px;
-}
-
-/* utils */
-/* ============================================================== */
-
-.align-left {
-  text-align: left;
-}
-
-.warn {
-  color: red;
+  padding: 8px;
 }
 </style>
